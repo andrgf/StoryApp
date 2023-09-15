@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">StoryApp</string>
+    <string name="register">Register</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password\n</string>
+    <string name="login">Login</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+</resources>
