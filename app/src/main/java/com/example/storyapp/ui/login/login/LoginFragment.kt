@@ -84,15 +84,14 @@ class LoginFragment : Fragment() {
         }
 
         viewModel.loginUser(email, password)
-
+        showLoading(true)
         viewModel.responseLogin.observe(viewLifecycleOwner) {login ->
-            showLoading(false)
             when(login) {
                 is Result.Success -> {
                     val loginResult = login.data
                     saveToken(loginResult)
-                    Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show()
                     showLoading(false)
+                    Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show()
                 }
                 is Result.Error -> {
                     showDialogError()

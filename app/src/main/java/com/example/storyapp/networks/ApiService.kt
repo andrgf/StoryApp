@@ -4,13 +4,18 @@ import com.example.storyapp.data.remote.auth.LoginResponse
 import com.example.storyapp.data.remote.auth.Register
 import com.example.storyapp.data.remote.auth.RegisterResponse
 import com.example.storyapp.data.remote.auth.User
+import com.example.storyapp.data.remote.story.ResponseStatus
 import com.example.storyapp.data.remote.story.ResponseStories
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface ApiService {
@@ -32,4 +37,11 @@ interface ApiService {
         @Query("size") size: Int? = null,
     ): Response<ResponseStories>
 
+    @Multipart
+    @POST("v1/stories")
+    suspend fun addStory(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+    ): Response<ResponseStatus>
 }

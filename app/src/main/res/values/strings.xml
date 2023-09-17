@@ -7,4 +7,9 @@
     <string name="login">Login</string>
     <string name="belum_punya_akun">Belum punya akun?</string>
     <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="logout">Logout</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="camerax">CameraX</string>
+    <string name="upload">Upload</string>
 </resources>
