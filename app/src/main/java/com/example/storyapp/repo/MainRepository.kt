@@ -1,26 +1,34 @@
 package com.example.storyapp.repo
 
+import android.util.JsonToken
+import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.storyapp.data.remote.story.ResponseStatus
+import androidx.lifecycle.liveData
+import com.example.storyapp.data.remote.story.PostStoryResponse
 import com.example.storyapp.model.Result
 import com.example.storyapp.networks.ApiService
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 class MainRepository private constructor(private val apiService: ApiService) {
-
-    private val _uploadResponse = MutableLiveData<Result<ResponseStatus.ResponseStatusInner>>()
-    val uploadResponse : LiveData<Result<ResponseStatus.ResponseStatusInner>> = _uploadResponse
-
     fun getStory() {
 
     }
 
-    fun uploadStory(token: String, file: MultipartBody.Part, description: RequestBody) {
-
+    fun uploadStory(
+        token: String,
+        file: MultipartBody.Part,
+        description: RequestBody
+    ): LiveData<Result<PostStoryResponse>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.postStory(token, file, description)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            Log.e("CreateStoryViewModel", "postStory: ${e.message.toString()}")
+            emit(Result.Error(e.message.toString()))
+        }
     }
-
 
     companion object {
         @Volatile

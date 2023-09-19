@@ -7,6 +7,8 @@ import com.example.storyapp.di.Injection
 import com.example.storyapp.ui.login.login.LoginViewModel
 import com.example.storyapp.ui.login.register.RegisterViewModel
 import com.example.storyapp.ui.main.MainViewModel
+import com.example.storyapp.ui.story.StoryFragment
+import com.example.storyapp.ui.story.StoryViewModel
 
 class ViewModelFactory private constructor(private val loginRepository: LoginRepository, private val mainRepository: MainRepository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -19,6 +21,9 @@ class ViewModelFactory private constructor(private val loginRepository: LoginRep
         }
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             return MainViewModel(mainRepository) as T
+        }
+        if (modelClass.isAssignableFrom(StoryViewModel::class.java)) {
+            return StoryViewModel(mainRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

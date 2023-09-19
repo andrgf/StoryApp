@@ -12,4 +12,5 @@
     <string name="camera">Camera</string>
     <string name="camerax">CameraX</string>
     <string name="upload">Upload</string>
+    <string name="write_a_description">Write a description</string>
 </resources>
