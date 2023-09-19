@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -24,11 +25,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.storyapp.R
 import com.example.storyapp.databinding.FragmentMainBinding
 import com.example.storyapp.model.LoginPref
+import com.example.storyapp.repo.ViewModelFactory
 
 class MainFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
     private var _binding : FragmentMainBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: MainViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

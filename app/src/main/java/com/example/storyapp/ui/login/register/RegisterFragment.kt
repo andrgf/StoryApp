@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.storyapp.databinding.FragmentRegisterBinding
@@ -18,6 +19,10 @@ class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: RegisterViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,11 +86,6 @@ class RegisterFragment : Fragment() {
         val email = binding.email.text.toString()
         val password = binding.password.text.toString()
 
-        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireContext())
-        val viewModel : RegisterViewModel by viewModels {
-            factory
-        }
-
         viewModel.registerUser(name, email, password)
         showLoading(true)
         viewModel.responseRegister.observe(viewLifecycleOwner) {
@@ -119,7 +119,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.progressBar.isVisible = isLoading
     }
 
 
