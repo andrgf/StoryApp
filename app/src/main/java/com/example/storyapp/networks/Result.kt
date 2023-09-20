@@ -1,4 +1,4 @@
-package com.example.storyapp.model
+package com.example.storyapp.networks
 
 sealed class Result<out R> private constructor() {
 

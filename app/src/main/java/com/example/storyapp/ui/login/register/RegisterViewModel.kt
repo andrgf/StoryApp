@@ -2,8 +2,6 @@ package com.example.storyapp.ui.login.register
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.storyapp.data.remote.auth.RegisterResponse
-import com.example.storyapp.model.Result
 import com.example.storyapp.repo.LoginRepository
 
 class RegisterViewModel(private val repository: LoginRepository) : ViewModel() {

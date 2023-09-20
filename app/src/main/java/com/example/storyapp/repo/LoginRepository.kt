@@ -9,7 +9,7 @@ import com.example.storyapp.data.remote.auth.Register
 import com.example.storyapp.data.remote.auth.RegisterResponse
 import com.example.storyapp.data.remote.auth.User
 import com.example.storyapp.networks.ApiService
-import com.example.storyapp.model.Result
+import com.example.storyapp.networks.Result
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

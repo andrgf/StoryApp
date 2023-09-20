@@ -3,7 +3,7 @@ package com.example.storyapp.ui.login.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.storyapp.data.remote.auth.Login
-import com.example.storyapp.model.Result
+import com.example.storyapp.networks.Result
 import com.example.storyapp.repo.LoginRepository
 
 class LoginViewModel(private val repository: LoginRepository) : ViewModel() {

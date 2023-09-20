@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.storyapp.data.remote.story.Story
-import com.example.storyapp.model.LoginPref
 import com.example.storyapp.networks.ApiService
+import com.example.storyapp.util.LoginPref
 
-class MainPagingSource(
+class StoryPagingSource(
     private val apiService: ApiService,
     private val context: Context
-    ) : PagingSource<Int, Story>() {
+) : PagingSource<Int, Story>() {
     override fun getRefreshKey(state: PagingState<Int, Story>): Int? {
         return state.anchorPosition?.let {
             val anchorPage = state.closestPageToPosition(it)
@@ -23,15 +23,14 @@ class MainPagingSource(
             val position = params.key ?: 1
             val pageSize = params.loadSize
             val token = LoginPref(context).getToken()
-            val response = apiService.getStory("Bearer $token", page = position, size = pageSize)
+            val response = apiService.getStory("Bearer $token", position, pageSize)
 
-            val story = response.body()?.listStory ?: emptyList()
+            val stories = response.body()?.listStory ?: emptyList()
 
             val prevKey = if (position == 1) null else position -1
-            val nextKey = if (story.isEmpty()) null else position +1
-
+            val nextKey = if (stories.isEmpty()) null else position +1
             LoadResult.Page(
-                data = story,
+                data = stories,
                 prevKey = prevKey,
                 nextKey = nextKey
             )
@@ -39,5 +38,4 @@ class MainPagingSource(
             LoadResult.Error(e)
         }
     }
-
 }

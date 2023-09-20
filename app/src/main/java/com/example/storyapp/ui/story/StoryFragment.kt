@@ -14,14 +14,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.storyapp.BuildConfig
 import com.example.storyapp.databinding.FragmentStoryBinding
-import com.example.storyapp.model.LoginPref
-import com.example.storyapp.model.Result
+import com.example.storyapp.util.LoginPref
+import com.example.storyapp.networks.Result
 import com.example.storyapp.repo.ViewModelFactory
 import com.example.storyapp.util.handleSamplingAndRotationBitmap
 import com.example.storyapp.util.reduceFileImage
@@ -38,7 +36,7 @@ class StoryFragment : Fragment() {
 
     private var _binding: FragmentStoryBinding? = null
     private val binding get() = _binding!!
-    private var getFile: File? = null
+    private var getImageFile: File? = null
     private val storyViewModel : StoryViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -62,9 +60,9 @@ class StoryFragment : Fragment() {
 
     private fun upload() {
         binding.btnUpload.setOnClickListener {
-            if (getFile != null) {
+            if (getImageFile != null) {
                 showLoading(true)
-                val file = reduceFileImage(getFile as File)
+                val file = reduceFileImage(getImageFile as File)
                 val descriptionText = binding.etDescription.text
                 if (!descriptionText.isNullOrEmpty()) {
                     val description = descriptionText.toString().toRequestBody("text/plain".toMediaType())
@@ -132,7 +130,7 @@ class StoryFragment : Fragment() {
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             val myFile = File(currentPhoto)
-            getFile = myFile
+            getImageFile = myFile
 
             try {
                 val bitmap = handleSamplingAndRotationBitmap(requireContext(), Uri.fromFile(myFile))
@@ -160,7 +158,7 @@ class StoryFragment : Fragment() {
         if (it.resultCode == AppCompatActivity.RESULT_OK) {
             val selected: Uri = it.data?.data as Uri
             val myFile = uriToFile(selected, requireContext())
-            getFile = myFile
+            getImageFile = myFile
             binding.imageView.setImageURI(selected)
         }
     }

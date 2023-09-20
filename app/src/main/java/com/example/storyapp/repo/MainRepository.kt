@@ -1,17 +1,31 @@
 package com.example.storyapp.repo
 
-import android.util.JsonToken
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.storyapp.data.remote.story.PostStoryResponse
-import com.example.storyapp.model.Result
+import com.example.storyapp.data.remote.story.Story
+import com.example.storyapp.networks.Result
 import com.example.storyapp.networks.ApiService
+import com.example.storyapp.paging.StoryPagingSource
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-class MainRepository private constructor(private val apiService: ApiService) {
-    fun getStory() {
+class MainRepository private constructor(private val apiService: ApiService, private val context: Context) {
+    fun getStory(): LiveData<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, context)
+            }
+        ).liveData
 
     }
 
@@ -34,10 +48,11 @@ class MainRepository private constructor(private val apiService: ApiService) {
         @Volatile
         private var instance: MainRepository? = null
         fun getInstance(
-            apiService: ApiService
+            apiService: ApiService,
+            context: Context
         ): MainRepository =
             instance ?: synchronized(this) {
-                instance ?: MainRepository(apiService)
+                instance ?: MainRepository(apiService, context)
             }.also { instance = it }
     }
 }

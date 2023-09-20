@@ -8,7 +8,7 @@
     android:gravity="center_vertical"
     tools:context=".ui.login.login.LoginFragment">
 
-    <com.example.storyapp.ui.cm.CvEmail
+    <com.example.storyapp.ui.customview.CvEmail
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:hint="@string/email" />
 
-    <com.example.storyapp.ui.cm.CvPassword
+    <com.example.storyapp.ui.customview.CvPassword
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -26,7 +26,7 @@
         android:layout_marginEnd="16dp"
         android:hint="@string/password" />
 
-    <com.example.storyapp.ui.cm.MyButton
+    <com.example.storyapp.ui.customview.MyButton
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.storyapp.ui.cm
+package com.example.storyapp.ui.customview
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -12,7 +12,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.example.storyapp.R
 
-class CvPassword : AppCompatEditText, View.OnTouchListener {
+class CvEmail : AppCompatEditText, View.OnTouchListener {
     private lateinit var clearButtonImage: Drawable
 
     constructor(context: Context) : super(context) {
@@ -34,8 +34,8 @@ class CvPassword : AppCompatEditText, View.OnTouchListener {
 
             }
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                if (s.toString().length < 8) {
-                    error = "Minimal 8 karakter"
+                if (!Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()) {
+                    error = "Email tidak valid"
                 }
             }
             override fun afterTextChanged(s: Editable) {

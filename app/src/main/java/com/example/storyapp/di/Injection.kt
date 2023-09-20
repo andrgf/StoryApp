@@ -14,6 +14,6 @@ object Injection {
 
     fun provideMainRepository(context: Context): MainRepository {
         val apiService = ApiConfig.getApiService()
-        return MainRepository.getInstance(apiService)
+        return MainRepository.getInstance(apiService, context)
     }
 }

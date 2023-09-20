@@ -11,14 +11,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.storyapp.data.remote.auth.Login
 import com.example.storyapp.databinding.FragmentLoginBinding
-import com.example.storyapp.model.LoginPref
-import com.example.storyapp.model.Result
+import com.example.storyapp.util.LoginPref
+import com.example.storyapp.networks.Result
 import com.example.storyapp.repo.ViewModelFactory
 
 class LoginFragment : Fragment() {
@@ -66,14 +67,13 @@ class LoginFragment : Fragment() {
                 navigateToRegister()
             }
         }
+        onBackPressed()
 
     }
 
     private fun navigateToRegister() {
-        binding.tvRegister.setOnClickListener {
-            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-            findNavController().navigate(action)
-        }
+        val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+        findNavController().navigate(action)
     }
 
     private fun login() {
@@ -150,6 +150,18 @@ class LoginFragment : Fragment() {
     private fun navigateToMain() {
         val action = LoginFragmentDirections.actionLoginFragmentToMainFragment3()
         NavHostFragment.findNavController(this).navigate(action)
+    }
+
+    private fun onBackPressed() {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+
+            }
+        )
     }
 
 }

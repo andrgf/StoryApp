@@ -89,4 +89,9 @@ dependencies {
     implementation ("androidx.paging:paging-runtime-ktx:3.1.1")
     implementation("androidx.paging:paging-common-ktx:3.1.1")
 
+    //coil
+    implementation ("io.coil-kt:coil:2.2.2")
+
+    implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
 }
