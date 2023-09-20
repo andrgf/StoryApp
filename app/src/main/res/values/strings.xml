@@ -13,4 +13,7 @@
     <string name="camerax">CameraX</string>
     <string name="upload">Upload</string>
     <string name="write_a_description">Write a description</string>
+    <string name="description">Description</string>
+    <string name="story_kuy">Story Kuy</string>
+    <string name="date">Date</string>
 </resources>

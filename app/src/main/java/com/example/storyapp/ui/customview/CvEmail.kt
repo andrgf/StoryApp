@@ -11,6 +11,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.example.storyapp.R
+import com.google.android.material.color.utilities.MaterialDynamicColors.background
 
 class CvEmail : AppCompatEditText, View.OnTouchListener {
     private lateinit var clearButtonImage: Drawable

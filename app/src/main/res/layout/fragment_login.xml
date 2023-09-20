@@ -8,6 +8,16 @@
     android:gravity="center_vertical"
     tools:context=".ui.login.login.LoginFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/story_kuy"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="italic"
+        android:textSize="52sp"
+        android:layout_marginBottom="18dp"
+        android:textColor="@color/blue"/>
+
     <com.example.storyapp.ui.customview.CvEmail
         android:id="@+id/email"
         android:layout_width="match_parent"
@@ -15,6 +25,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_edit_text"
+        android:backgroundTint="@color/dark"
+        android:paddingStart="12dp"
         android:hint="@string/email" />
 
     <com.example.storyapp.ui.customview.CvPassword
@@ -24,6 +37,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_edit_text"
+        android:backgroundTint="@color/dark"
+        android:paddingStart="12dp"
         android:hint="@string/password" />
 
     <com.example.storyapp.ui.customview.MyButton

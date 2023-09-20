@@ -27,6 +27,8 @@ class StoryPagingAdapter(
         val story = getItem(position)
         holder.binding.apply {
             tvName.text = story?.name
+            tvDate.text = story?.createdAt
+            tvDescription.text = story?.description
 
             Glide.with(context)
                 .load(story?.photoUrl)

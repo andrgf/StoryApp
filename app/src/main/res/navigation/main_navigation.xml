@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainFragment_to_storyFragment"
             app:destination="@id/storyFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment2"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -45,6 +48,28 @@
         tools:layout="@layout/fragment_story" >
         <action
             android:id="@+id/action_storyFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.storyapp.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="desc"
+            app:argType="string" />
+        <argument
+            android:name="created"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
 

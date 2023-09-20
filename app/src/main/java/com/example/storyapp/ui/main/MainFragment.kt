@@ -68,6 +68,16 @@ class MainFragment : Fragment() {
             override fun onClick(story: Story) {
                 val image = story.photoUrl
                 val name = story.name
+                val desc = story.description
+                val created = story.createdAt
+                val action = MainFragmentDirections.actionMainFragmentToDetailFragment2(
+                    image,
+                    name,
+                    desc,
+                    created
+                )
+
+                findNavController().navigate(action)
             }
         })
         viewModel.getStory().observe(viewLifecycleOwner) {
@@ -136,6 +146,10 @@ class MainFragment : Fragment() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getStory()
+    }
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
