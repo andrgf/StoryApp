@@ -1,5 +1,6 @@
 package com.example.storyapp.ui.login.login
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -23,7 +24,7 @@ import com.example.storyapp.networks.Result
 import com.example.storyapp.repo.ViewModelFactory
 
 class LoginFragment : Fragment() {
-    private var _binding : FragmentLoginBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
 
@@ -38,6 +39,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showAnimation()
         showLoading(false)
         binding.btnLogin.isEnabled = false
         binding.apply {
@@ -46,6 +48,7 @@ class LoginFragment : Fragment() {
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     showButton()
                 }
+
                 override fun afterTextChanged(p0: Editable?) {}
 
             })
@@ -55,6 +58,7 @@ class LoginFragment : Fragment() {
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     showButton()
                 }
+
                 override fun afterTextChanged(p0: Editable?) {}
 
             })
@@ -79,26 +83,28 @@ class LoginFragment : Fragment() {
     private fun login() {
         val email = binding.email.text.toString()
         val password = binding.password.text.toString()
-        val factory : ViewModelFactory = ViewModelFactory.getInstance(requireContext())
-        val viewModel : LoginViewModel by viewModels {
+        val factory: ViewModelFactory = ViewModelFactory.getInstance(requireContext())
+        val viewModel: LoginViewModel by viewModels {
             factory
         }
 
         viewModel.loginUser(email, password)
         showLoading(true)
-        viewModel.responseLogin.observe(viewLifecycleOwner) {login ->
-            when(login) {
+        viewModel.responseLogin.observe(viewLifecycleOwner) { login ->
+            when (login) {
                 is Result.Success -> {
                     val loginResult = login.data
                     saveToken(loginResult)
                     showLoading(false)
                     Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show()
                 }
+
                 is Result.Error -> {
                     showDialogError()
                     showLoading(false)
                     Log.d("Login", "Error")
                 }
+
                 is Result.Loading -> {
                     showLoading(true)
                     Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
@@ -122,7 +128,7 @@ class LoginFragment : Fragment() {
     fun showButton() {
         binding.apply {
             btnLogin.isEnabled =
-                        password.text.toString().isNotEmpty() && validPassword(password.text.toString()) &&
+                password.text.toString().isNotEmpty() && validPassword(password.text.toString()) &&
                         email.text.toString().isNotEmpty() && validEmail(email.text.toString())
 
         }
@@ -132,7 +138,7 @@ class LoginFragment : Fragment() {
         return Patterns.EMAIL_ADDRESS.matcher(value).matches()
     }
 
-    private fun validPassword(value: String) : Boolean {
+    private fun validPassword(value: String): Boolean {
         return value.length >= 8
     }
 
@@ -162,6 +168,14 @@ class LoginFragment : Fragment() {
 
             }
         )
+    }
+
+    private fun showAnimation() {
+        ObjectAnimator.ofFloat(binding.tvApp, View.TRANSLATION_X, -40f, 40f).apply {
+            duration = 4000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
     }
 
     override fun onDestroy() {

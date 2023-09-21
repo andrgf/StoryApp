@@ -20,6 +20,9 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.Date
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -128,4 +131,10 @@ fun rotateImageIfRequired(img: Bitmap, selectedImage: Uri): Bitmap {
         ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(img, 270)
         else -> img
     }
+}
+
+fun formatDateTime(isoDateString: String): String {
+    val dateTime = ZonedDateTime.parse(isoDateString)
+    val dateFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+    return dateFormatter.format(dateTime)
 }

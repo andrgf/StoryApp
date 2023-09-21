@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.storyapp.data.remote.story.Story
 import com.example.storyapp.databinding.ItemStoryBinding
+import com.example.storyapp.util.formatDateTime
 
 class StoryPagingAdapter(
     private val context: Context,
@@ -27,7 +28,7 @@ class StoryPagingAdapter(
         val story = getItem(position)
         holder.binding.apply {
             tvName.text = story?.name
-            tvDate.text = story?.createdAt
+            tvDate.text = story?.createdAt?.let { formatDateTime(it) }
             tvDescription.text = story?.description
 
             Glide.with(context)

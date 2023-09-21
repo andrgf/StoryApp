@@ -1,5 +1,6 @@
 package com.example.storyapp.ui.login.register
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -35,6 +36,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showAnimation()
         showLoading(false)
         binding.btnRegister.isEnabled = false
         binding.apply {
@@ -122,6 +124,13 @@ class RegisterFragment : Fragment() {
         binding.progressBar.isVisible = isLoading
     }
 
+    private fun showAnimation() {
+        ObjectAnimator.ofFloat(binding.tvApp, View.TRANSLATION_X, -40f, 40f).apply {
+            duration = 4000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+    }
 
     override fun onDestroy() {
         super.onDestroy()

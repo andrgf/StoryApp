@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.storyapp.databinding.FragmentDetailBinding
+import com.example.storyapp.util.formatDateTime
 
 class DetailFragment : Fragment() {
 
@@ -31,6 +32,7 @@ class DetailFragment : Fragment() {
                 .into(imgStory)
             tvName.text = bundle.name
             tvDescription.text = bundle.desc
+            tvDate.text = formatDateTime(bundle.created)
         }
     }
 

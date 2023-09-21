@@ -10,6 +10,7 @@
     tools:context=".ui.login.register.RegisterFragment">
 
     <TextView
+        android:id="@+id/tvApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/story_kuy"
@@ -53,6 +54,7 @@
         android:background="@drawable/bg_edit_text"
         android:backgroundTint="@color/dark"
         android:paddingStart="12dp"
+        android:inputType="textPassword"
         android:hint="@string/password" />
 
     <com.example.storyapp.ui.customview.MyButton
