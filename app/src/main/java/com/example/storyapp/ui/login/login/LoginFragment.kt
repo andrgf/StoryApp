@@ -97,6 +97,7 @@ class LoginFragment : Fragment() {
                     saveToken(loginResult)
                     showLoading(false)
                     Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show()
+                    Log.d("Token", "${saveToken(loginResult)}")
                 }
 
                 is Result.Error -> {

@@ -7,4 +7,8 @@
         android:icon="@drawable/logout_icon"
         android:title="@string/logout"/>
 
+    <item
+        android:id="@+id/map"
+        android:title="@string/maps"/>
+
 </menu>

@@ -9,6 +9,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.example.storyapp.data.remote.story.PostStoryResponse
+import com.example.storyapp.data.remote.story.ResponseStories
 import com.example.storyapp.data.remote.story.Story
 import com.example.storyapp.networks.Result
 import com.example.storyapp.networks.ApiService
@@ -40,6 +41,17 @@ class MainRepository private constructor(private val apiService: ApiService, pri
             emit(Result.Success(response))
         } catch (e: Exception) {
             Log.e("CreateStoryViewModel", "postStory: ${e.message.toString()}")
+            emit(Result.Error(e.message.toString()))
+        }
+    }
+
+    fun getStoryWithLocation(): LiveData<Result<ResponseStories>> = liveData {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getStoryWithLocation(1)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            Log.d("ListStoryViewModel", "storyLocation ${e.message.toString()}")
             emit(Result.Error(e.message.toString()))
         }
     }

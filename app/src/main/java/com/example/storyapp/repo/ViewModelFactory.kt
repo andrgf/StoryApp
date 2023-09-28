@@ -7,6 +7,7 @@ import com.example.storyapp.di.Injection
 import com.example.storyapp.ui.login.login.LoginViewModel
 import com.example.storyapp.ui.login.register.RegisterViewModel
 import com.example.storyapp.ui.main.MainViewModel
+import com.example.storyapp.ui.map.MapViewModel
 import com.example.storyapp.ui.story.StoryFragment
 import com.example.storyapp.ui.story.StoryViewModel
 
@@ -24,6 +25,9 @@ class ViewModelFactory private constructor(private val loginRepository: LoginRep
         }
         if (modelClass.isAssignableFrom(StoryViewModel::class.java)) {
             return StoryViewModel(mainRepository) as T
+        }
+        if (modelClass.isAssignableFrom(MapViewModel::class.java)) {
+            return MapViewModel(mainRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }

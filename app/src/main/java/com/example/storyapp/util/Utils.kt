@@ -1,18 +1,13 @@
 package com.example.storyapp.util
 
 import android.content.ContentResolver
-import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.media.ExifInterface
 import android.net.Uri
-import android.os.Build
 import android.os.Environment
-import android.provider.MediaStore
-import androidx.core.content.FileProvider
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage
-import com.example.storyapp.BuildConfig
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream

@@ -49,6 +49,10 @@ class MainFragment : Fragment() {
                     logout()
                     true
                 }
+                R.id.map -> {
+                    maps()
+                    true
+                }
                 else -> false
             }
         }
@@ -58,6 +62,11 @@ class MainFragment : Fragment() {
         onBackPressed()
         SetUpPagingAdapter()
 
+    }
+
+    private fun maps() {
+        val action = MainFragmentDirections.actionMainFragmentToMapFragment()
+        findNavController().navigate(action)
     }
 
     private fun SetUpPagingAdapter() {
