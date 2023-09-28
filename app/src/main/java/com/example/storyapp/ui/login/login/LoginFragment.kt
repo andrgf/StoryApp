@@ -88,33 +88,24 @@ class LoginFragment : Fragment() {
             factory
         }
 
-        viewModel.loginUser(email, password)
-        showLoading(true)
-        viewModel.responseLogin.observe(viewLifecycleOwner) { login ->
-            when (login) {
-                is Result.Success -> {
-                    val loginResult = login.data
-                    saveToken(loginResult)
-                    showLoading(false)
-                    Toast.makeText(requireContext(), "Login Success", Toast.LENGTH_SHORT).show()
-                    Log.d("Token", "${saveToken(loginResult)}")
-                }
-
-                is Result.Error -> {
-                    showDialogError()
-                    showLoading(false)
-                    Log.d("Login", "Error")
-                }
-
-                is Result.Loading -> {
-                    showLoading(true)
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
-                    Log.d("Login", "Loading")
+        viewModel.loginUser(email, password).observe(requireActivity()) {
+            if (it != null) {
+                when(it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Success -> {
+                        saveToken(it.data.loginResult)
+                        showLoading(false)
+                    }
+                    is Result.Error -> {
+                        showLoading(false)
+                        showDialogError()
+                        Log.d("Login", "${it.error}")
+                    }
                 }
             }
         }
-
-
     }
 
     private fun showDialogError() {

@@ -5,10 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.storyapp.repo.LoginRepository
 
 class RegisterViewModel(private val repository: LoginRepository) : ViewModel() {
-    private val _responseRegister = repository.registerResponse
-    val responseRegister : LiveData<Boolean> = _responseRegister
+    fun registerUser(name: String, email: String, password: String) = repository.register(name, email, password)
 
-    fun registerUser(name: String, email: String, password: String) {
-        repository.register(name, email, password)
-    }
 }

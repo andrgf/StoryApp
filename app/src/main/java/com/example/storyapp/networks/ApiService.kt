@@ -11,6 +11,8 @@ import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
@@ -20,15 +22,20 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    @FormUrlEncoded
     @POST("v1/register")
-    fun register(
-        @Body register: Register
-    ) : Call<RegisterResponse>
+    suspend fun register(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ) : RegisterResponse
 
+    @FormUrlEncoded
     @POST("v1/login")
-    fun login(
-        @Body user: User
-    ) : Call<LoginResponse>
+    suspend fun login(
+        @Field("email") email: String,
+        @Field("password") password : String
+    ) : LoginResponse
 
     @GET("v1/stories")
     suspend fun getStory(

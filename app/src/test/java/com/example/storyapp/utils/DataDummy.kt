@@ -1,4 +1,4 @@
-package com.example.storyapp
+package com.example.storyapp.utils
 
 import com.example.storyapp.data.remote.auth.Login
 import com.example.storyapp.data.remote.auth.LoginResponse

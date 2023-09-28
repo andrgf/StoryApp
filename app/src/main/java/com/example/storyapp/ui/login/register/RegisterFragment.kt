@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.storyapp.databinding.FragmentRegisterBinding
+import com.example.storyapp.networks.Result
 import com.example.storyapp.repo.ViewModelFactory
 
 class RegisterFragment : Fragment() {
@@ -88,16 +90,22 @@ class RegisterFragment : Fragment() {
         val email = binding.email.text.toString()
         val password = binding.password.text.toString()
 
-        viewModel.registerUser(name, email, password)
-        showLoading(true)
-        viewModel.responseRegister.observe(viewLifecycleOwner) {
-            if(it) {
-                Toast.makeText(requireContext(), "Register Success", Toast.LENGTH_SHORT).show()
-                showLoading(false)
-                navigateToLogin()
-            } else {
-                showLoading(false)
-                Toast.makeText(requireContext(), "Register Invalid", Toast.LENGTH_SHORT).show()
+        viewModel.registerUser(name, email, password).observe(requireActivity()) {
+            if (it != null) {
+                when (it) {
+                    is Result.Loading -> {
+                        showLoading(true)
+                    }
+                    is Result.Success -> {
+                        showLoading(false)
+                        Log.d("Register", "Register Success")
+                        navigateToLogin()
+                    }
+                    is Result.Error -> {
+                        showLoading(false)
+                        Toast.makeText(requireContext(), "Register Failed", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
