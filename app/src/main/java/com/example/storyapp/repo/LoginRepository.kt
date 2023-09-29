@@ -6,14 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.storyapp.data.remote.auth.Login
 import com.example.storyapp.data.remote.auth.LoginResponse
-import com.example.storyapp.data.remote.auth.Register
 import com.example.storyapp.data.remote.auth.RegisterResponse
-import com.example.storyapp.data.remote.auth.User
 import com.example.storyapp.networks.ApiService
 import com.example.storyapp.networks.Result
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginRepository private constructor(private val apiService: ApiService) {
 

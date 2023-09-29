@@ -45,10 +45,12 @@ class MainRepository private constructor(private val apiService: ApiService, pri
         }
     }
 
-    fun getStoryWithLocation(): LiveData<Result<ResponseStories>> = liveData {
+    fun getStoryWithLocation(
+        token: String
+    ): LiveData<Result<ResponseStories>> = liveData {
         emit(Result.Loading)
         try {
-            val response = apiService.getStoryWithLocation(1)
+            val response = apiService.getStoryWithLocation(token,1)
             emit(Result.Success(response))
         } catch (e: Exception) {
             Log.d("ListStoryViewModel", "storyLocation ${e.message.toString()}")
