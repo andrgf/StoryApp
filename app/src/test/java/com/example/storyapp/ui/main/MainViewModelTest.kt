@@ -84,6 +84,7 @@ class MainViewModelTest {
 
         Assert.assertNotNull(differ.snapshot())
         Assert.assertEquals(dummyData, differ.snapshot())
+        assertEquals(0, differ.snapshot().size)
     }
 }
 
