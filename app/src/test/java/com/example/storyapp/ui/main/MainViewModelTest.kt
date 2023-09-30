@@ -60,7 +60,30 @@ class MainViewModelTest {
         Assert.assertNotNull(differ.snapshot())
         Assert.assertEquals(dummyStory.listStory, differ.snapshot())
         Assert.assertEquals(dummyStory.listStory.size, differ.snapshot().size)
-        Assert.assertEquals(dummyStory.listStory[0].id, differ.snapshot()[0]?.id)
+        Assert.assertEquals(dummyStory.listStory[0], differ.snapshot()[0])
+    }
+
+    @Test
+    fun `when getStories return Zero if no Data`() = runTest {
+        val dummyData = emptyList<Story>()
+        val data: PagingData<Story> = StoryPaging.snapshot(dummyData)
+        val expectedStories = MutableLiveData<PagingData<Story>>()
+        expectedStories.value = data
+        Mockito.`when`(repository.getStory()).thenReturn(expectedStories)
+
+        val mainViewModel = MainViewModel(repository)
+        val actualStories: PagingData<Story> = mainViewModel.getStory().getOrAwaitValue()
+
+        val differ = AsyncPagingDataDiffer(
+            diffCallback = StoryPagingAdapter.DIFF_CALLBACK,
+            updateCallback = listUpdateCallback,
+            workerDispatcher = Dispatchers.Main,
+        )
+
+        differ.submitData(actualStories)
+
+        Assert.assertNotNull(differ.snapshot())
+        Assert.assertEquals(dummyData, differ.snapshot())
     }
 }
 
